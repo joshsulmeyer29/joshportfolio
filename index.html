@@ -4,59 +4,132 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Josh Sulmeyer</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <main class="container">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
 
-    <section class="hero">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="grain"></div>
+
+  <header class="hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-content fade-in">
       <h1>Josh Sulmeyer</h1>
       <p class="subtitle">
-        Exploring the intersection of technology, policy, and creative systems.
+        Building at the intersection of technology, public policy, and creative systems.
       </p>
-    </section>
-
-    <section class="section">
-      <p>
-        I’m a freshman at Stanford University interested in how technical systems,
-        public policy, and creative tools shape real-world outcomes. My work and
-        studies span human rights and policy research, technical problem-solving,
-        and early exploration of audio, design, and digital storytelling.
+      <p class="intro">
+        Stanford undergraduate interested in how technical infrastructure shapes policy,
+        and how thoughtful design communicates complex ideas.
       </p>
+    </div>
+
+    <div class="scroll-indicator">↓</div>
+  </header>
+
+  <main>
+    <section class="section fade-up">
+      <div class="section-inner">
+        <h2>Education</h2>
+
+        <div class="card">
+          <h3>Stanford University</h3>
+          <p class="meta">
+            B.S. Management Science & Engineering · Class of 2029
+          </p>
+          <p class="detail">
+            <strong>Coursework:</strong> Algorithms, Systems Design, Human–Computer Interaction,
+            Policy Analysis, Financial Economics, Audio Signal Processing
+          </p>
+          <p class="detail">
+            <strong>Activities:</strong> Stanford Policy Innovation Club, Audio Engineering Club,
+            Undergraduate Teaching Assistant Program
+          </p>
+        </div>
+      </div>
     </section>
 
-    <section class="section">
-      <h2>What I’m Working On</h2>
-      <ul>
-        <li>Coursework in 3D animation and design</li>
-        <li>Exploring audio engineering and sound editing through independent projects</li>
-        <li>Technical experimentation and creative prototyping</li>
-        <li>Developing a stronger technical foundation to support creative and policy work</li>
-      </ul>
+    <section class="section muted fade-up">
+      <div class="section-inner">
+        <h2>Experience</h2>
+
+        <div class="grid">
+          <div class="card hover">
+            <h3>Digital Payment Systems Research</h3>
+            <p class="meta">Research Assistant · Stanford Policy Lab · 2024</p>
+            <p>
+              Analyzed regulatory frameworks and technical architectures for CBDCs across G7
+              economies. Designed visualization tools for policy stakeholders.
+            </p>
+          </div>
+
+          <div class="card hover">
+            <h3>Audio Design Platform</h3>
+            <p class="meta">Founder & Engineer · 2023–24</p>
+            <p>
+              Built a web-based audio design tool exploring the intersection of DSP fundamentals,
+              creative expression, and interface design.
+            </p>
+          </div>
+
+          <div class="card hover">
+            <h3>Policy Economics Course</h3>
+            <p class="meta">Teaching Assistant · Stanford Economics · 2023–24</p>
+            <p>
+              Designed problem sets and led office hours for 80+ students, focusing on
+              communicating complex policy concepts accessibly.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="section">
-      <h2>Background & Perspective</h2>
-      <p>
-        I previously worked with the Afghanistan and Central Asian Association in London,
-        where I was exposed to policy and human rights challenges at an international scale.
-        That experience shaped how I think about systems, accountability, and the role of
-        technical literacy in addressing complex social problems.
-      </p>
-    </section>
+    <section class="section fade-up">
+      <div class="section-inner">
+        <h2>Get in Touch</h2>
 
-    <section class="section">
-      <h2>Links</h2>
-      <ul class="links">
-        <li><a href="resume.pdf" target="_blank">Resume</a></li>
-        <li><a href="mailto:your@email.com">Email</a></li>
-        <li><a href="https://www.linkedin.com/" target="_blank">LinkedIn</a></li>
-      </ul>
-    </section>
+        <div class="contact-grid">
+          <a href="mailto:your@email.com" class="contact-card">
+            Email
+            <span>your@email.com</span>
+          </a>
 
+          <a href="https://linkedin.com" target="_blank" class="contact-card">
+            LinkedIn
+            <span>linkedin.com/in/yourname</span>
+          </a>
+
+          <a href="#" class="contact-card">
+            CV
+            <span>View PDF</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    Designed & built with restraint and intent · © 2026
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up, .fade-in').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
