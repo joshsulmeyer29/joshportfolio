@@ -13,7 +13,7 @@
 
   <noscript>
     <style>
-      .fade-in, .fade-up { opacity: 1 !important; transform: none !important; }
+      .fade-up, .hero-image-container { opacity: 1 !important; transform: none !important; }
     </style>
   </noscript>
 </head>
@@ -24,7 +24,7 @@
   <header class="hero">
     <div class="hero-bg"></div>
 
-    <div class="hero-content fade-in">
+    <div class="hero-content">
       <h1>Josh Sulmeyer</h1>
       <p class="subtitle">
         Building at the intersection of technology, public policy, and creative systems.
@@ -33,6 +33,10 @@
         Stanford undergraduate interested in how technical infrastructure shapes policy,
         and how thoughtful design communicates complex ideas.
       </p>
+    </div>
+
+    <div class="hero-image-container">
+      <img src="pic2.jpg" alt="Josh Sulmeyer" class="hero-scroll-photo">
     </div>
 
     <div class="scroll-indicator">↓</div>
@@ -57,6 +61,12 @@
             Undergraduate Teaching Assistant Program
           </p>
         </div>
+      </div>
+    </section>
+
+    <section class="section photo-break fade-up">
+      <div class="section-inner centered">
+        <img src="pic3.jpg" alt="Josh Sulmeyer working" class="mid-section-photo">
       </div>
     </section>
 
@@ -124,8 +134,8 @@
   </footer>
 
   <script>
-    // Reveal elements on scroll
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Intersection Observer for general fade-up elements
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -134,9 +144,21 @@
         });
       }, { threshold: 0.1 });
 
-      document.querySelectorAll('.fade-up, .fade-in').forEach(el => {
+      document.querySelectorAll('.fade-up').forEach(el => {
         observer.observe(el);
       });
+
+      // 2. Scroll Event Listener for Hero Image
+      const heroImageContainer = document.querySelector('.hero-image-container');
+      window.addEventListener('scroll', () => {
+        // If scrolled more than 100px, show the image
+        if (window.scrollY > 100) {
+          heroImageContainer.classList.add('scrolled-reveal');
+        } else {
+          // Optional: uncomment below if you want it to hide again when scrolling up
+          // heroImageContainer.classList.remove('scrolled-reveal');
+        }
+      }, { passive: true }); // passive improves scrolling performance
     });
   </script>
 </body>
