@@ -28,7 +28,7 @@ body {
   position: fixed;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
-  pointer-events: none; /* Allows clicking links underneath the grain */
+  pointer-events: none;
   z-index: 9999;
 }
 
@@ -38,12 +38,16 @@ body {
   display: flex;
   align-items: center;
   position: relative;
+  overflow: hidden; /* Ensures images don't spill out */
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 30%, rgba(90,138,122,.12), transparent 60%);
+  /* This creates the semi-transparent effect over pic1.jpg */
+  background: linear-gradient(rgba(246, 247, 246, 0.85), rgba(246, 247, 246, 0.95)), url('pic1.jpg');
+  background-size: cover;
+  background-position: center;
   z-index: 0;
 }
 
@@ -51,12 +55,7 @@ body {
   max-width: 680px;
   position: relative;
   z-index: 2;
-}
-
-/* Force visibility for Hero so it doesn't wait for JS */
-.hero-content.fade-in {
-  opacity: 1;
-  transform: translateY(0);
+  /* Removed fade-in class here so it's visible immediately */
 }
 
 .hero h1 {
@@ -78,6 +77,36 @@ body {
   color: var(--text);
 }
 
+/* --- New: Scroll-Revealed Hero Image (pic2.jpg) --- */
+.hero-image-container {
+  position: absolute;
+  bottom: 10%;
+  right: 8%;
+  width: 320px; /* Adjust size as needed */
+  z-index: 1;
+  
+  /* Initial Hidden State */
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The class added by JS on scroll */
+.hero-image-container.scrolled-reveal {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hero-scroll-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+  transform: rotate(2deg); /* Slight jaunty angle */
+}
+/* -------------------------------------------------- */
+
+
 .scroll-indicator {
   position: absolute;
   bottom: 2.5rem;
@@ -86,6 +115,7 @@ body {
   font-size: 1.4rem;
   color: var(--accent);
   animation: bounce 2s infinite;
+  z-index: 2;
 }
 
 @keyframes bounce {
@@ -107,6 +137,26 @@ body {
   max-width: 1000px;
   margin: 0 auto;
 }
+
+.section-inner.centered {
+    text-align: center;
+}
+
+/* --- New: Mid-Section Photo styling (pic3.jpg) --- */
+.photo-break {
+    padding: 4rem 4rem; /* Slightly less padding for this specific section */
+}
+
+.mid-section-photo {
+    max-width: 90%;
+    width: 700px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.08);
+    border: 1px solid var(--border);
+}
+/* -------------------------------------------------- */
+
 
 h2 {
   font-family: 'Libre Baskerville', serif;
@@ -204,11 +254,22 @@ footer {
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+  .hero-image-container {
+    width: 250px;
+    right: 5%;
+  }
+}
+
 @media (max-width: 768px) {
   .hero, .section {
     padding: 5rem 1.5rem;
   }
   .hero h1 {
     font-size: 2.8rem;
+  }
+  /* On small screens, let's hide the scroll photo as it might overlap text */
+  .hero-image-container {
+    display: none;
   }
 }
