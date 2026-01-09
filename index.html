@@ -27,10 +27,6 @@
       <p class="intro">Stanford undergraduate interested in how technical infrastructure shapes policy.</p>
     </div>
 
-    <div class="corner-portrait-container" id="portrait-fade">
-      <img src="pic2.jpg" alt="Josh" class="corner-portrait">
-    </div>
-
     <div class="scroll-indicator">↓</div>
   </header>
 
@@ -103,21 +99,18 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const bgFade = document.getElementById('hero-crossfade');
-      const portraitFade = document.getElementById('portrait-fade');
       
-      // 1. Crossfade Logic
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
-        const triggerHeight = window.innerHeight * 0.7; // Speed of the fade
+        // The crossfade completes after scrolling 60% of the viewport height
+        const triggerHeight = window.innerHeight * 0.6; 
         let progress = Math.min(scrollY / triggerHeight, 1);
         
-        // Background and portrait both fade in as you scroll
+        // Directly maps scroll progress to opacity
         bgFade.style.opacity = progress;
-        portraitFade.style.opacity = progress;
         
       }, { passive: true });
 
-      // 2. Section Fade-up Observer
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('visible');
