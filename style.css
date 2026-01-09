@@ -6,270 +6,76 @@
   --border: rgba(0, 0, 0, 0.08);
 }
 
-* {
-  box-sizing: border-box;
-}
+body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
-  color: var(--text);
-  background: var(--bg);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-/* Subtle grain for depth */
 .grain {
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
+  pointer-events: none; z-index: 9999;
 }
 
+/* Hero Container */
 .hero {
-  min-height: 100vh;
-  padding: 8rem 4rem;
+  height: 100vh;
   display: flex;
   align-items: center;
+  padding: 0 4rem;
   position: relative;
-  overflow: hidden; /* Ensures images don't spill out */
+  background: var(--bg);
 }
 
-.hero-bg {
+/* Initial Background (pic1.jpg) */
+.hero-bg-static {
   position: absolute;
   inset: 0;
-  /* This creates the semi-transparent effect over pic1.jpg */
-  background: linear-gradient(rgba(246, 247, 246, 0.85), rgba(246, 247, 246, 0.95)), url('pic1.jpg');
+  background: linear-gradient(rgba(246,247,246,0.7), rgba(246,247,246,0.8)), url('pic1.jpg');
   background-size: cover;
   background-position: center;
   z-index: 0;
 }
 
-.hero-content {
-  max-width: 680px;
-  position: relative;
-  z-index: 2;
-  /* Removed fade-in class here so it's visible immediately */
-}
-
-.hero h1 {
-  font-family: 'Libre Baskerville', serif;
-  font-size: clamp(3rem, 6vw, 4.5rem);
-  font-weight: 400;
-  margin: 0 0 1.5rem 0;
-}
-
-.subtitle {
-  font-size: 1.4rem;
-  color: var(--muted);
-  margin-bottom: 2rem;
-}
-
-.intro {
-  font-size: 1.1rem;
-  max-width: 520px;
-  color: var(--text);
-}
-
-/* --- New: Scroll-Revealed Hero Image (pic2.jpg) --- */
-.hero-image-container {
-  position: absolute;
+/* The Wrapper for pic2.jpg - This is what expands */
+.expanding-photo-wrapper {
+  position: fixed; /* Keeps it in view as we scroll */
   bottom: 10%;
   right: 8%;
-  width: 320px; /* Adjust size as needed */
-  z-index: 1;
-  
-  /* Initial Hidden State */
-  opacity: 0;
-  transform: translateY(60px) scale(0.95);
-  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* The class added by JS on scroll */
-.hero-image-container.scrolled-reveal {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.hero-scroll-photo {
-  width: 100%;
-  height: auto;
+  width: 320px;
+  height: 450px;
+  overflow: hidden;
   border-radius: 16px;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
-  transform: rotate(2deg); /* Slight jaunty angle */
-}
-/* -------------------------------------------------- */
-
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.4rem;
-  color: var(--accent);
-  animation: bounce 2s infinite;
-  z-index: 2;
+  z-index: 1;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+  pointer-events: none;
+  /* Smooth out the jitter */
+  will-change: width, height, right, bottom; 
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 8px); }
+#morph-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3; /* Initial faintness */
+  transition: opacity 0.1s linear;
 }
 
-.section {
-  padding: 7rem 4rem;
+.hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 2; /* Sits above the expanding photo */
+  max-width: 700px;
 }
 
-.section.muted {
-  background: rgba(0,0,0,0.015);
-}
+.hero h1 { font-family: 'Libre Baskerville', serif; font-size: 4.5rem; margin: 0; }
 
-.section-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-}
+.section { padding: 8rem 4rem; position: relative; z-index: 3; background: var(--bg); }
 
-.section-inner.centered {
-    text-align: center;
-}
+.card { border: 1px solid var(--border); padding: 2.5rem; border-radius: 12px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); }
 
-/* --- New: Mid-Section Photo styling (pic3.jpg) --- */
-.photo-break {
-    padding: 4rem 4rem; /* Slightly less padding for this specific section */
-}
+.fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 
-.mid-section-photo {
-    max-width: 90%;
-    width: 700px;
-    height: auto;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.08);
-    border: 1px solid var(--border);
-}
-/* -------------------------------------------------- */
-
-
-h2 {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 400;
-  font-size: 2rem;
-  margin-bottom: 3rem;
-}
-
-.card {
-  border: 1px solid var(--border);
-  padding: 2.5rem;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(8px);
-}
-
-.card + .card {
-  margin-top: 2rem;
-}
-
-.card.hover {
-  transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .4s ease;
-}
-
-.card.hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,.06);
-}
-
-.meta {
-  font-size: .95rem;
-  color: var(--accent);
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.detail {
-  font-size: .95rem;
-  color: var(--muted);
-  margin-top: 0.5rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-}
-
-.contact-card {
-  border: 1px solid var(--border);
-  padding: 1.75rem;
-  border-radius: 10px;
-  text-decoration: none;
-  color: inherit;
-  transition: all .3s ease;
-  background: white;
-}
-
-.contact-card span {
-  display: block;
-  margin-top: .5rem;
-  font-size: .9rem;
-  color: var(--muted);
-}
-
-.contact-card:hover {
-  border-color: var(--accent);
-  transform: scale(1.02);
-}
-
-footer {
-  padding: 4rem;
-  text-align: center;
-  font-size: .85rem;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-}
-
-/* Animations */
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .hero-image-container {
-    width: 250px;
-    right: 5%;
-  }
-}
+.mid-section-photo { width: 100%; max-width: 800px; border-radius: 20px; }
 
 @media (max-width: 768px) {
-  .hero, .section {
-    padding: 5rem 1.5rem;
-  }
-  .hero h1 {
-    font-size: 2.8rem;
-  }
-  /* On small screens, let's hide the scroll photo as it might overlap text */
-  .hero-image-container {
-    display: none;
-  }
+  .expanding-photo-wrapper { display: none; } /* Complex effect is too heavy for mobile */
+  .hero h1 { font-size: 3rem; }
 }
