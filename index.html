@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="style.css" />
 
   <noscript>
@@ -19,7 +18,8 @@
   <div class="grain"></div>
 
   <header class="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-bg primary"></div>
+    <div class="hero-bg secondary" id="hero-crossfade"></div>
 
     <div class="hero-content">
       <h1>Josh Sulmeyer</h1>
@@ -27,8 +27,8 @@
       <p class="intro">Stanford undergraduate interested in how technical infrastructure shapes policy.</p>
     </div>
 
-    <div class="expanding-container">
-      <img src="pic2.jpg" alt="Josh" id="morph-photo">
+    <div class="corner-portrait-container" id="portrait-fade">
+      <img src="pic2.jpg" alt="Josh" class="corner-portrait">
     </div>
 
     <div class="scroll-indicator">↓</div>
@@ -41,7 +41,8 @@
         <div class="card">
           <h3>Stanford University</h3>
           <p class="meta">B.S. Management Science & Engineering · Class of 2029</p>
-          <p class="detail"><strong>Coursework:</strong> Algorithms, Systems Design, HCI, Audio Signal Processing.</p>
+          <p class="detail"><strong>Coursework:</strong> Algorithms, Systems Design, HCI, Policy Analysis, Audio Signal Processing.</p>
+          <p class="detail"><strong>Activities:</strong> Stanford Policy Innovation Club, Audio Engineering Club.</p>
         </div>
       </div>
     </section>
@@ -59,33 +60,64 @@
           <div class="card hover">
             <h3>Digital Payment Systems Research</h3>
             <p class="meta">Research Assistant · Stanford Policy Lab</p>
-            <p>Analyzed regulatory frameworks and technical architectures for CBDCs.</p>
+            <p>Analyzed regulatory frameworks and technical architectures for CBDCs across G7 economies.</p>
           </div>
+
+          <div class="card hover">
+            <h3>Audio Design Platform</h3>
+            <p class="meta">Founder & Engineer · 2023–24</p>
+            <p>Built a web-based audio design tool exploring the intersection of DSP fundamentals and interface design.</p>
           </div>
+
+          <div class="card hover">
+            <h3>Policy Economics Course</h3>
+            <p class="meta">Teaching Assistant · Stanford Economics</p>
+            <p>Designed problem sets and led office hours for 80+ students.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-up">
+      <div class="section-inner">
+        <h2>Get in Touch</h2>
+        <div class="contact-grid">
+          <a href="mailto:your@email.com" class="contact-card">
+            Email <span>your@email.com</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="contact-card">
+            LinkedIn <span>linkedin.com/in/yourname</span>
+          </a>
+          <a href="#" class="contact-card">
+            CV <span>View PDF</span>
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
+  <footer class="site-footer">
+    Designed & built with restraint and intent · © 2026
+  </footer>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const morphPhoto = document.getElementById('morph-photo');
-      const container = document.querySelector('.expanding-container');
+      const bgFade = document.getElementById('hero-crossfade');
+      const portraitFade = document.getElementById('portrait-fade');
       
+      // 1. Crossfade Logic
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
-        const triggerHeight = window.innerHeight * 0.8; // Duration of growth
-        
+        const triggerHeight = window.innerHeight * 0.7; // Speed of the fade
         let progress = Math.min(scrollY / triggerHeight, 1);
         
-        if (window.innerWidth > 768) {
-          // Scale grows from 1 to 4x to cover the screen
-          // Opacity grows from 0 to 1
-          container.style.transform = `scale(${1 + (progress * 3.5)}) translateX(${progress * -10}%)`;
-          container.style.opacity = progress;
-          container.style.borderRadius = `${16 * (1 - progress)}px`;
-        }
+        // Background and portrait both fade in as you scroll
+        bgFade.style.opacity = progress;
+        portraitFade.style.opacity = progress;
+        
       }, { passive: true });
 
+      // 2. Section Fade-up Observer
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('visible');
