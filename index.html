@@ -7,23 +7,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css" />
+
+  <noscript>
+    <style>.fade-up { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
 </head>
 
 <body>
   <div class="grain"></div>
 
-  <header class="hero" id="hero-trigger">
-    <div class="hero-bg-static"></div>
-    
-    <div class="expanding-photo-wrapper">
-      <img src="pic2.jpg" alt="Josh" id="morph-photo">
-    </div>
+  <header class="hero">
+    <div class="hero-bg"></div>
 
     <div class="hero-content">
       <h1>Josh Sulmeyer</h1>
       <p class="subtitle">Building at the intersection of technology, public policy, and creative systems.</p>
       <p class="intro">Stanford undergraduate interested in how technical infrastructure shapes policy.</p>
+    </div>
+
+    <div class="expanding-container">
+      <img src="pic2.jpg" alt="Josh" id="morph-photo">
     </div>
 
     <div class="scroll-indicator">↓</div>
@@ -36,7 +41,7 @@
         <div class="card">
           <h3>Stanford University</h3>
           <p class="meta">B.S. Management Science & Engineering · Class of 2029</p>
-          <p class="detail"><strong>Coursework:</strong> Algorithms, Systems Design, HCI, Policy Analysis.</p>
+          <p class="detail"><strong>Coursework:</strong> Algorithms, Systems Design, HCI, Audio Signal Processing.</p>
         </div>
       </div>
     </section>
@@ -47,43 +52,40 @@
       </div>
     </section>
 
-    </main>
+    <section class="section muted fade-up">
+      <div class="section-inner">
+        <h2>Experience</h2>
+        <div class="grid">
+          <div class="card hover">
+            <h3>Digital Payment Systems Research</h3>
+            <p class="meta">Research Assistant · Stanford Policy Lab</p>
+            <p>Analyzed regulatory frameworks and technical architectures for CBDCs.</p>
+          </div>
+          </div>
+      </div>
+    </section>
+  </main>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const morphPhoto = document.getElementById('morph-photo');
-      const wrapper = document.querySelector('.expanding-photo-wrapper');
+      const container = document.querySelector('.expanding-container');
       
-      // 1. Morphing Logic
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
-        const maxScroll = 500; // The scroll distance where the effect completes
+        const triggerHeight = window.innerHeight * 0.8; // Duration of growth
         
-        // Calculate progress (0 to 1)
-        let progress = Math.min(scrollY / maxScroll, 1);
+        let progress = Math.min(scrollY / triggerHeight, 1);
         
-        if (window.innerWidth > 768) { // Only run on desktop
-            // Expand size
-            const width = 320 + (window.innerWidth - 320) * progress;
-            const height = 450 + (window.innerHeight - 450) * progress;
-            
-            // Move position to fill screen
-            const right = 8 * (1 - progress);
-            const bottom = 10 * (1 - progress);
-            
-            // Update Styles
-            wrapper.style.width = `${width}px`;
-            wrapper.style.height = `${height}px`;
-            wrapper.style.right = `${right}%`;
-            wrapper.style.bottom = `${bottom}%`;
-            wrapper.style.borderRadius = `${16 * (1 - progress)}px`;
-            
-            // Adjust opacity: starts at 0.3, goes to 0.9
-            morphPhoto.style.opacity = 0.3 + (0.6 * progress);
+        if (window.innerWidth > 768) {
+          // Scale grows from 1 to 4x to cover the screen
+          // Opacity grows from 0 to 1
+          container.style.transform = `scale(${1 + (progress * 3.5)}) translateX(${progress * -10}%)`;
+          container.style.opacity = progress;
+          container.style.borderRadius = `${16 * (1 - progress)}px`;
         }
       }, { passive: true });
 
-      // 2. Standard Fade-up Observer
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('visible');
