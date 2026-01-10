@@ -1,156 +1,119 @@
-/* --- LEAVE HERO ALONE (V2.2 Core) --- */
 :root {
   --bg: #f6f7f6;
-  --name: #000000;         
-  --subtitle: #2c3e50;     
-  --text: #2d3436;         
-  --muted: #636e72;        
-  --accent: #436d60;       
+  --text: #1e1f1e;
+  --muted: #6b6f6c;
+  --accent: #5a8a7a;
   --border: rgba(0, 0, 0, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.4);
 }
 
-/* [Insert your existing V2.2 Hero, .hero-bg, and .hero-content CSS here] */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-/* --- REFINED CONTENT SECTIONS (V3 Update) --- */
+.grain {
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999;
+}
 
-.section { padding: 10rem 4rem; background: var(--bg); position: relative; z-index: 5; }
-.section.muted { background: #eff1ef; }
-
-.section-header {
+/* --- HERO --- */
+.hero {
+  height: 100vh;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 4rem;
+  padding: 0 4rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.section-number {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--accent);
+/* Both backgrounds share these properties */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
 }
 
-.section-header h2 {
-  margin: 0;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
+/* Base state: pic1 */
+.hero-bg.primary {
+  background-image: linear-gradient(rgba(246,247,246,0.8), rgba(246,247,246,0.9)), url('pic1.jpg');
 }
 
-/* Modern Card Styling */
-.card.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  padding: 3.5rem;
-  border-radius: 24px;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.02);
+/* Target state: pic2 - Locked to full dimensions */
+.hero-bg.secondary {
+  background-image: linear-gradient(rgba(246,247,246,0.6), rgba(246,247,246,0.8)), url('pic2.jpg');
+  opacity: 0;
+  will-change: opacity;
 }
 
-.card-header { margin-bottom: 2rem; }
-.label { 
-  display: block; 
-  font-size: 0.75rem; 
-  text-transform: uppercase; 
-  letter-spacing: 0.1em; 
-  color: var(--muted); 
-  margin-bottom: 0.5rem;
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+.hero h1 { font-family: 'Libre Baskerville', serif; font-size: 4.5rem; margin: 0; }
+.subtitle { font-size: 1.4rem; color: var(--muted); margin: 1rem 0 2rem 0; }
+
+/* --- SECTIONS --- */
+.section { 
+  padding: 8rem 4rem; 
+  position: relative; 
+  z-index: 5; 
+  background: var(--bg); 
 }
 
-.card h3 { 
-  font-family: 'Libre Baskerville', serif; 
-  font-size: 2.2rem; 
-  margin: 0; 
-  color: var(--name); 
+.section.muted { background: rgba(0,0,0,0.015); }
+.section-inner { max-width: 1000px; margin: 0 auto; }
+.centered { text-align: center; }
+
+h2 { font-family: 'Libre Baskerville', serif; font-size: 2rem; margin-bottom: 3rem; font-weight: 400; }
+
+.card { 
+  border: 1px solid var(--border); 
+  padding: 2.5rem; 
+  border-radius: 12px; 
+  background: rgba(255,255,255,0.7); 
+  backdrop-filter: blur(8px); 
 }
 
-.card-subtitle { 
-  font-weight: 600; 
-  color: var(--subtitle); 
-  font-size: 1.1rem; 
-  margin-bottom: 2rem; 
-}
-
-.card-details {
-  border-top: 1px solid var(--border);
-  padding-top: 2rem;
-  font-size: 1rem;
-}
-
-/* Asymmetric Grid Logic */
-.grid.asymmetric {
+.grid, .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
 }
 
-.grid.asymmetric .featured { grid-column: 1 / -1; }
-
-.card.hover:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.08);
-  border-color: var(--accent);
-}
-
-/* Contact Refinement */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.contact-button {
-  background: white;
+.contact-card {
   border: 1px solid var(--border);
-  padding: 2.5rem;
-  border-radius: 16px;
+  padding: 2rem;
+  border-radius: 12px;
   text-decoration: none;
-  color: var(--text);
-  transition: all 0.4s ease;
-  display: flex;
-  flex-direction: column;
+  color: inherit;
+  background: white;
+  transition: all 0.3s ease;
 }
 
-.contact-button:hover {
-  background: var(--name);
-  color: white;
-  border-color: var(--name);
-}
+.contact-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.mid-section-photo { width: 100%; max-width: 800px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 
-.contact-button .meta {
-  margin-top: 1.5rem;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.contact-button:hover .meta { color: rgba(255,255,255,0.6); }
-
-/* Footer */
+/* --- FOOTER --- */
 .site-footer {
-  padding: 6rem 4rem;
-  border-top: 1px solid var(--border);
-  background: var(--bg);
+  padding: 4rem;
   text-align: center;
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+  font-size: 0.85rem;
   color: var(--muted);
+  background: var(--bg);
+  position: relative;
+  z-index: 5;
+  border-top: 1px solid var(--border);
 }
 
-.footer-inner .divider { color: var(--border); }
+/* --- ANIMATIONS --- */
+.fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 
-@media (max-width: 900px) {
-  .grid.asymmetric, .contact-grid { grid-template-columns: 1fr; }
-  .section { padding: 6rem 1.5rem; }
+.scroll-indicator {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  color: var(--accent); font-size: 1.5rem; z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 0 2rem; }
+  .hero h1 { font-size: 3rem; }
+  .section { padding: 5rem 1.5rem; }
 }
