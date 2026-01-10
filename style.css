@@ -1,145 +1,156 @@
-/* --- LEAVING HERO ALONE: Start of V3 Content Styling --- */
-
-/* Modernized Section Spacing */
-.section { 
-  padding: 10rem 4rem; /* Increased vertical breathing room */
-  position: relative; 
-  z-index: 5; 
-  background: var(--bg); 
+/* --- LEAVE HERO ALONE (V2.2 Core) --- */
+:root {
+  --bg: #f6f7f6;
+  --name: #000000;         
+  --subtitle: #2c3e50;     
+  --text: #2d3436;         
+  --muted: #636e72;        
+  --accent: #436d60;       
+  --border: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.4);
 }
 
+/* [Insert your existing V2.2 Hero, .hero-bg, and .hero-content CSS here] */
+
+/* --- REFINED CONTENT SECTIONS (V3 Update) --- */
+
+.section { padding: 10rem 4rem; background: var(--bg); position: relative; z-index: 5; }
 .section.muted { background: #eff1ef; }
 
-.section-inner { 
-  max-width: 1100px; /* Slightly wider for modern monitors */
-  margin: 0 auto; 
-}
-
-/* Refined Typography Hierarchy */
-h2 { 
-  font-family: 'Libre Baskerville', serif; 
-  font-size: 0.85rem; /* Monospaced-style label for H2 */
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--accent);
-  margin-bottom: 4rem;
+.section-header {
   display: flex;
   align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
 }
 
-h2::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-  margin-left: 2rem;
+.section-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
 }
 
-h3 {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 2.2rem;
-  font-weight: 400;
-  margin: 0 0 1rem 0;
-  color: var(--name);
+.section-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
 }
 
-/* Advanced Card Design */
-.card { 
-  border: 1px solid var(--glass-border); 
-  padding: 3rem; 
-  border-radius: 20px; 
-  background: var(--glass-bg); 
-  backdrop-filter: blur(12px); 
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+/* Modern Card Styling */
+.card.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  padding: 3.5rem;
+  border-radius: 24px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.02);
 }
 
-.card.hover:hover { 
-  transform: translateY(-12px); 
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08); 
+.card-header { margin-bottom: 2rem; }
+.label { 
+  display: block; 
+  font-size: 0.75rem; 
+  text-transform: uppercase; 
+  letter-spacing: 0.1em; 
+  color: var(--muted); 
+  margin-bottom: 0.5rem;
+}
+
+.card h3 { 
+  font-family: 'Libre Baskerville', serif; 
+  font-size: 2.2rem; 
+  margin: 0; 
+  color: var(--name); 
+}
+
+.card-subtitle { 
+  font-weight: 600; 
+  color: var(--subtitle); 
+  font-size: 1.1rem; 
+  margin-bottom: 2rem; 
+}
+
+.card-details {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  font-size: 1rem;
+}
+
+/* Asymmetric Grid Logic */
+.grid.asymmetric {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+.grid.asymmetric .featured { grid-column: 1 / -1; }
+
+.card.hover:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.08);
   border-color: var(--accent);
 }
 
-.meta { 
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  color: var(--muted); 
-  font-weight: 500; 
-  margin-bottom: 1.5rem;
-  display: block;
-}
-
-.detail { 
-  color: var(--text); 
-  font-size: 1.05rem; 
-  margin-top: 1.5rem;
-  border-top: 1px solid var(--border);
-  padding-top: 1.5rem;
-}
-
-/* Asymmetric Grid for Experience */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-}
-
-.grid .card:first-child {
-  grid-column: 1 / -1; /* Feature the first item across the full width */
-}
-
-/* Contact Section refinement */
+/* Contact Refinement */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
-.contact-card {
+.contact-button {
+  background: white;
   border: 1px solid var(--border);
   padding: 2.5rem;
   border-radius: 16px;
   text-decoration: none;
   color: var(--text);
-  background: white;
   transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
-.contact-card:hover { 
-  border-color: var(--name);
+.contact-button:hover {
   background: var(--name);
   color: white;
+  border-color: var(--name);
 }
 
-.contact-card:hover span {
-  color: rgba(255,255,255,0.7);
-}
-
-.contact-card span { 
-  display: block; 
-  margin-top: 2rem; 
-  color: var(--muted); 
-  font-size: 0.85rem;
+.contact-button .meta {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  color: var(--muted);
 }
 
-/* Footer refinement */
+.contact-button:hover .meta { color: rgba(255,255,255,0.6); }
+
+/* Footer */
 .site-footer {
   padding: 6rem 4rem;
-  text-align: center;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  background: var(--bg);
   border-top: 1px solid var(--border);
+  background: var(--bg);
+  text-align: center;
 }
 
+.footer-inner {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+.footer-inner .divider { color: var(--border); }
+
 @media (max-width: 900px) {
-  .grid, .contact-grid { grid-template-columns: 1fr; }
-  .section { padding: 6rem 2rem; }
+  .grid.asymmetric, .contact-grid { grid-template-columns: 1fr; }
+  .section { padding: 6rem 1.5rem; }
 }
