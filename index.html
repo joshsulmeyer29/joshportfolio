@@ -1,124 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Josh Sulmeyer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-
-  <noscript>
-    <style>.fade-up { opacity: 1 !important; transform: none !important; }</style>
-  </noscript>
-</head>
-
-<body>
-  <div class="grain"></div>
-
-  <header class="hero">
-    <div class="hero-bg primary"></div>
-    <div class="hero-bg secondary" id="hero-crossfade"></div>
-
-    <div class="hero-content">
-      <h1>Josh Sulmeyer</h1>
-      <p class="subtitle">Building at the intersection of technology, public policy, and creative systems.</p>
-      <p class="intro">Stanford undergraduate interested in how technical infrastructure shapes policy.</p>
+<main>
+  <section class="section fade-up">
+    <div class="section-inner">
+      <h2>01 / Education</h2>
+      <div class="card">
+        <span class="meta">Institution</span>
+        <h3>Stanford University</h3>
+        <p class="subtitle" style="margin-top:0;">B.S. Management Science & Engineering · Class of 2029</p>
+        <div class="detail">
+          <p><strong>Focus:</strong> Intersection of Algorithms, Systems Design, and Human–Computer Interaction.</p>
+          <p><strong>Select Coursework:</strong> Policy Analysis, Financial Economics, Audio Signal Processing, Undergraduate Teaching Program.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="scroll-indicator">↓</div>
-  </header>
+  <section class="section photo-break fade-up">
+    <div class="section-inner centered">
+      <img src="pic3.jpg" alt="Josh Barley" class="mid-section-photo">
+    </div>
+  </section>
 
-  <main>
-    <section class="section fade-up">
-      <div class="section-inner">
-        <h2>Education</h2>
-        <div class="card">
-          <h3>Stanford University</h3>
-          <p class="meta">B.S. Management Science & Engineering · Class of 2029</p>
-          <p class="detail"><strong>Coursework:</strong> Algorithms, Systems Design, HCI, Policy Analysis, Audio Signal Processing.</p>
-          <p class="detail"><strong>Activities:</strong> Stanford Policy Innovation Club, Audio Engineering Club.</p>
+  <section class="section muted fade-up">
+    <div class="section-inner">
+      <h2>02 / Selected Experience</h2>
+      <div class="grid">
+        <div class="card hover">
+          <span class="meta">Stanford Policy Lab / 2024</span>
+          <h3>Digital Payment Systems Research</h3>
+          <p>Analyzed regulatory frameworks and technical architectures for CBDCs across G7 economies. Bridging the gap between technical sovereign debt systems and public policy stakeholders.</p>
+        </div>
+
+        <div class="card hover">
+          <span class="meta">Engineering / 2023–24</span>
+          <h3>Audio Design Platform</h3>
+          <p>Founder & Lead Engineer for a web-based DSP tool. Exploring creative expression through signal processing fundamentals.</p>
+        </div>
+
+        <div class="card hover">
+          <span class="meta">Stanford Economics / 2023–24</span>
+          <h3>Policy Economics TA</h3>
+          <p>Teaching Assistant for undergraduate policy economics. Led office hours for 80+ students, communicating complex systems accessibly.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section photo-break fade-up">
-      <div class="section-inner centered">
-        <img src="pic3.jpg" alt="Josh" class="mid-section-photo">
+  <section class="section fade-up">
+    <div class="section-inner">
+      <h2>03 / Connection</h2>
+      <div class="contact-grid">
+        <a href="mailto:your@email.com" class="contact-card">
+          <strong>Email</strong>
+          <span>your@email.com</span>
+        </a>
+        <a href="https://linkedin.com" target="_blank" class="contact-card">
+          <strong>LinkedIn</strong>
+          <span>joshsulmeyer-barley</span>
+        </a>
+        <a href="#" class="contact-card">
+          <strong>Curriculum Vitae</strong>
+          <span>Download PDF</span>
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
+</main>
 
-    <section class="section muted fade-up">
-      <div class="section-inner">
-        <h2>Experience</h2>
-        <div class="grid">
-          <div class="card hover">
-            <h3>Digital Payment Systems Research</h3>
-            <p class="meta">Research Assistant · Stanford Policy Lab</p>
-            <p>Analyzed regulatory frameworks and technical architectures for CBDCs across G7 economies.</p>
-          </div>
-
-          <div class="card hover">
-            <h3>Audio Design Platform</h3>
-            <p class="meta">Founder & Engineer · 2023–24</p>
-            <p>Built a web-based audio design tool exploring the intersection of DSP fundamentals and interface design.</p>
-          </div>
-
-          <div class="card hover">
-            <h3>Policy Economics Course</h3>
-            <p class="meta">Teaching Assistant · Stanford Economics</p>
-            <p>Designed problem sets and led office hours for 80+ students.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section fade-up">
-      <div class="section-inner">
-        <h2>Get in Touch</h2>
-        <div class="contact-grid">
-          <a href="mailto:your@email.com" class="contact-card">
-            Email <span>your@email.com</span>
-          </a>
-          <a href="https://linkedin.com" target="_blank" class="contact-card">
-            LinkedIn <span>linkedin.com/in/yourname</span>
-          </a>
-          <a href="#" class="contact-card">
-            CV <span>View PDF</span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    Designed & built with restraint and intent · © 2026
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const bgFade = document.getElementById('hero-crossfade');
-      
-      window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        // The crossfade completes after scrolling 60% of the viewport height
-        const triggerHeight = window.innerHeight * 0.6; 
-        let progress = Math.min(scrollY / triggerHeight, 1);
-        
-        // Directly maps scroll progress to opacity
-        bgFade.style.opacity = progress;
-        
-      }, { passive: true });
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-    });
-  </script>
-</body>
-</html>
+<footer class="site-footer">
+  Josh Sulmeyer-Barley — © 2026 — Built with Intent
+</footer>
